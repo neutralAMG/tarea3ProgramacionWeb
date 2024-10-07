@@ -394,6 +394,9 @@ function GenerateFormView(FormData){
     mainContainer.appendChild(newInnerDiv);
 }
 
+function GenerateConfirmView(FormData, DegreeSections){
+
+}
 GenerateFormView(FormData);
 
 function validate(input){

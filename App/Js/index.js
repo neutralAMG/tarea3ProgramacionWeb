@@ -465,6 +465,7 @@ function GenerateConfirmView(FormData, subjects){
         li.textContent = `${data}: ${FormData[data]}`;
         ul.appendChild(li);
     }
+
     const table = document.createElement("table");
     const thTitle = document.createElement("th");
     thTitle.textContent = "Subjects"
@@ -539,11 +540,39 @@ function GenerateConfirmView(FormData, subjects){
         table.appendChild(tSection);
     }
 
+    const SubmitBtn = document.createElement("button");
+    SubmitBtn.textContent = "Submit";
+    SubmitBtn.addEventListener("click", (e) =>{
+        e.preventDefault();
+        if(!confirm("Are you sure you whant to save this info ?")) return;
+        confirmationDiv.remove();
     
+        FormData.name = "";
+        FormData.state = "";
+        FormData.city = "";
+        FormData.sector = "";
+        FormData.street = "";
+        FormData.degree = 0;
+        let count = 5;
+        for(let i = 1; i <= count; i++){
+            for(let j = 0; j < DegreeSections[i][j].length; j++){
+                
+                for(let s = 0; s < DegreeSections[i][j].times.length; s++){
+                    DegreeSections[i][j].times[s].isSelected = false; 
+                }
+            }
+          
+         }
+         console.log(subjects);
+         console.log(DegreeSections)
+        GenerateFormView(FormData);
+    });
+
     confirmationDiv.appendChild(goBackToFirstBtn);
     confirmationDiv.appendChild(goBackToSecondBtn);
     confirmationDiv.appendChild(ul);
     confirmationDiv.appendChild(table);
+    confirmationDiv.appendChild(SubmitBtn);
     mainContainer.appendChild(confirmationDiv);
 
 }

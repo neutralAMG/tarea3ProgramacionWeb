@@ -29,7 +29,7 @@ const DegreeSections ={
         },
         {
             subjectName: "Advance data bases",
-            times:[{time:"vie - 8:00am - 11:00am", isSelected: false}, {time:"vie - 1:00pm - 5:00pm", isSelected: false}, {time:"vie - 6:00pm - 9:00pm", isSelected: false}]
+            times:[{time:"Vie - 8:00am - 11:00am", isSelected: false}, {time:"Vie - 1:00pm - 5:00pm", isSelected: false}, {time:"Vie - 6:00pm - 9:00pm", isSelected: false}]
         }
     ],
     2:[
@@ -51,7 +51,7 @@ const DegreeSections ={
         },
         {
             subjectName: "web programing 2",
-            times:[{time:"vie - 8:00am - 11:00am", isSelected: false}, {time:"vie - 1:00pm - 5:00pm", isSelected: false}, {time:"vie - 6:00pm - 9:00pm", isSelected: false}]
+            times:[{time:"Vie - 8:00am - 11:00am", isSelected: false}, {time:"Vie - 1:00pm - 5:00pm", isSelected: false}, {time:"Vie - 6:00pm - 9:00pm", isSelected: false}]
         }
     ],
     3:[
@@ -73,7 +73,7 @@ const DegreeSections ={
         },
         {
             subjectName: "Digital systems",
-            times:[{time:"vie - 8:00am - 11:00am", isSelected: false}, {time:"vie - 1:00pm - 5:00pm", isSelected: false}, {time:"vie - 6:00pm - 9:00pm", isSelected: false}]
+            times:[{time:"Vie - 8:00am - 11:00am", isSelected: false}, {time:"Vie - 1:00pm - 5:00pm", isSelected: false}, {time:"Vie - 6:00pm - 9:00pm", isSelected: false}]
         }
     ],
     4:[
@@ -95,7 +95,7 @@ const DegreeSections ={
         },
         {
             subjectName: "Surround sound",
-            times:[{time:"vie - 8:00am - 11:00am", isSelected: false}, {time:"vie - 1:00pm - 5:00pm", isSelected: false}, {time:"vie - 6:00pm - 9:00pm", isSelected: false}]
+            times:[{time:"Vie - 8:00am - 11:00am", isSelected: false}, {time:"Vie - 1:00pm - 5:00pm", isSelected: false}, {time:"Vie - 6:00pm - 9:00pm", isSelected: false}]
         }
     ],
     5:[
@@ -117,12 +117,18 @@ const DegreeSections ={
         },
         {
             subjectName: "Advance routing",
-            times:[{time:"vie - 8:00am - 11:00am", isSelected: false}, {time:"vie - 1:00pm - 5:00pm", isSelected: false}, {time:"vie - 6:00pm - 9:00pm", isSelected: false}]
+            times:[{time:"Vie - 8:00am - 11:00am", isSelected: false}, {time:"Vie - 1:00pm - 5:00pm", isSelected: false}, {time:"Vie - 6:00pm - 9:00pm", isSelected: false}]
         }
     ],
 };
 
-
+const Degrees={
+    1:"Software",
+    2:"MultiMedia",
+    3:"Mecatronics",
+    4:"Sound",
+    5:"Networking",
+}
 
 function GenerateFormView(FormData){
  
@@ -272,8 +278,6 @@ function GenerateFormView(FormData){
     SubmitBtn.textContent = "submit";
     SubmitBtn.type = "submit"
 
-
-
     select.appendChild(defaultOption);
     select.appendChild(option1);
     select.appendChild(option2);
@@ -339,8 +343,9 @@ function GenerateFormView(FormData){
 }
 
   function GenerateSubjectSelectionView(degreeSelected){
-   document.querySelector(".form-data-container").remove();
-    const subjects =  DegreeSections[degreeSelected];
+   if(document.querySelector(".form-data-container") != null) document.querySelector(".form-data-container").remove();
+    let subjects = {...DegreeSections};
+    subjects = subjects[degreeSelected];
     console.log(subjects)
 
     const newInnerDiv = document.createElement("div");
@@ -372,8 +377,9 @@ function GenerateFormView(FormData){
             radioInput.type = "radio";
             radioInput.value = subjects[i].times[j].time;
             radioInput.name = subjects[i].subjectName;
-            radioInput.id = subjects[i].subjectName + subjects[i].times[j];
-            radioInput.select = subjects[i].times[j].isSelected
+            radioInput.setAttribute("data-index", j)
+            radioInput.id = subjects[i].subjectName + subjects[i].times[j].time;
+            radioInput.checked = subjects[i].times[j].isSelected
             form.appendChild(radioInput)
             const label = document.createElement("label")
             label.textContent = subjects[i].times[j].time
@@ -389,14 +395,159 @@ function GenerateFormView(FormData){
     buttonToSubmit.textContent = "submit";
 
     form.appendChild(buttonToSubmit);
+    form.addEventListener("submit", (e) =>{
+        const validationsResults = [];
+        let isValid = true;
+      
+        e.preventDefault();
+        for(let i = 0; i< subjects.length; i++){
+           const radios = document.getElementsByName(subjects[i].subjectName) 
+
+           for(let j = 0; j < radios.length; j++){
+            if(!radios[j].checked === true){
+                DegreeSections[degreeSelected][i].times[j].isSelected = false; 
+                continue;
+            }  
+            const selectedIndex = radios[j].getAttribute("data-index")
+            DegreeSections[degreeSelected][i].times[selectedIndex].isSelected = true; 
+           }
+        }
+        console.log(subjects);
+        GenerateConfirmView(FormData, subjects)
+    })
     newInnerDiv.appendChild(form)
 
     mainContainer.appendChild(newInnerDiv);
 }
 
-function GenerateConfirmView(FormData, DegreeSections){
+function GenerateConfirmView(FormData, subjects){
+    document.querySelector(".SubjectSelection").remove();
+    console.log(subjects)
+
+    const confirmationDiv = document.createElement("div");
+    confirmationDiv.className = "confirmationView"
+
+    const goBackToFirstBtn = document.createElement("p");
+    goBackToFirstBtn.textContent = "Go back to registration";
+    goBackToFirstBtn.style.color = "blue";
+    goBackToFirstBtn.style.textDecoration = "underline";
+    goBackToFirstBtn.style.cursor = "pointer";
+
+    goBackToFirstBtn.addEventListener("click", (e) =>{
+        e.preventDefault();
+        confirmationDiv.remove();
+        GenerateFormView(FormData);
+        console.log(FormData);
+    });
+
+    const goBackToSecondBtn = document.createElement("p");
+    goBackToSecondBtn.textContent = "Go back to registration";
+    goBackToSecondBtn.style.color = "blue";
+    goBackToSecondBtn.style.textDecoration = "underline";
+    goBackToSecondBtn.style.cursor = "pointer";
+
+    goBackToSecondBtn.addEventListener("click", (e) =>{
+        e.preventDefault();
+        confirmationDiv.remove();
+        GenerateSubjectSelectionView(FormData.degree);
+        console.log(FormData.degree);
+    });
+
+    const ul = document.createElement("ul");
+
+    for(let data in FormData){
+        const li = document.createElement("li");
+        if(data === "degree"){
+            li.textContent = `${data}: ${Degrees[FormData[data]]}`;
+            ul.appendChild(li);
+            continue;
+        }
+        li.textContent = `${data}: ${FormData[data]}`;
+        ul.appendChild(li);
+    }
+    const table = document.createElement("table");
+    const thTitle = document.createElement("th");
+    thTitle.textContent = "Subjects"
+    const th1 = document.createElement("th");
+    th1.textContent = "Monday";
+
+    const th2 = document.createElement("th");
+    th2.textContent = "Tuesday";
+    const th3 = document.createElement("th");
+    th3.textContent = "Wednesday";
+    const th4 = document.createElement("th");
+    th4.textContent = "Thursday";
+    const th5 = document.createElement("th");
+    th5.textContent = "Friday";
+
+    const tHeader = document.createElement("tr");
+
+    tHeader.appendChild(thTitle)
+    tHeader.appendChild(th1)
+    tHeader.appendChild(th2)
+    tHeader.appendChild(th3)
+    tHeader.appendChild(th4)
+    tHeader.appendChild(th5)
+    table.appendChild(tHeader);
+
+
+    const days = {
+        "Lun": 1,
+        "Mar":2,
+        "Mier": 3,
+        "Ju":4,
+        "Vie": 5
+    }
+
+    let selectedObjects = [];
+
+    for(let i = 0; i<  subjects.length ; i++){
+        for(let j = 0; j< subjects[i].times.length; j++){
+            if (subjects[i].times[j].isSelected === true) {
+                selectedObjects.push({name: subjects[i].subjectName, time: subjects[i].times[j].time})
+            }
+        }
+    }
+
+    for(let i = 0; i<  selectedObjects.length ; i++){
+        const tSection = document.createElement("tr");
+
+        const tdSubject = document.createElement("td");
+
+        tdSubject.textContent = selectedObjects[i].name;
+
+        tSection.appendChild(tdSubject);
+
+        for(let j = 1; j <= 5; j++){
+            
+         if (days[selectedObjects[i].time.split(" - ")[0]] === j) {
+            const tdTime = document.createElement("td");
+
+            tdTime.textContent = selectedObjects[i].time;
+
+            tSection.appendChild(tdTime);
+
+            continue;
+
+         }
+         const tdEmpty = document.createElement("td");
+
+         tSection.appendChild(tdEmpty);
+            
+        }
+
+        table.appendChild(tSection);
+    }
+
+    
+    confirmationDiv.appendChild(goBackToFirstBtn);
+    confirmationDiv.appendChild(goBackToSecondBtn);
+    confirmationDiv.appendChild(ul);
+    confirmationDiv.appendChild(table);
+    mainContainer.appendChild(confirmationDiv);
 
 }
+
 GenerateFormView(FormData);
 
 function validate(input){

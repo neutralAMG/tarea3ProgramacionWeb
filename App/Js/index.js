@@ -135,6 +135,12 @@ function GenerateFormView(FormData){
     const FormDataContainer = document.createElement("div");
     FormDataContainer.classList.add("form-data-container", "container", "container-fluid", "mt-5", "w-50");
     
+    const title = document.createElement("h1");
+    title.textContent = "Register"
+    title.classList.add("display-1","text-center", "mb-2");
+
+    FormDataContainer.appendChild(title);
+
     const form = document.createElement("form");
     form.className = "form-data";
 
@@ -261,12 +267,13 @@ function GenerateFormView(FormData){
 
     const btnDiv = document.createElement("div");
     btnDiv.style.minWidth = "100%";
+    btnDiv.classList.add("d-flex", "justify-content-center")
 
     const ClearBtn = document.createElement("button");
     ClearBtn.className = "clear"
     ClearBtn.textContent = "clear"
     ClearBtn.type = "button"
-    ClearBtn.classList.add("btn", "btn-outline-info", "w-50")
+    ClearBtn.classList.add("btn", "btn-outline-info", "w-25", "me-1")
     ClearBtn.addEventListener("click", (e)=>{
         e.preventDefault();
         ["#name", "#state", "#city", "#sector", "#street", "#degree"].forEach(inputId =>{
@@ -281,7 +288,7 @@ function GenerateFormView(FormData){
     SubmitBtn.className = "submit";
     SubmitBtn.textContent = "submit";
     SubmitBtn.type = "submit";
-    SubmitBtn.classList.add("btn", "btn-info", "w-50");
+    SubmitBtn.classList.add("btn", "btn-info", "w-25","ms-1");
      
     btnDiv.appendChild(ClearBtn);
     btnDiv.appendChild(SubmitBtn);
@@ -343,7 +350,12 @@ function GenerateSubjectSelectionView(degreeSelected){
     subjects = subjects[degreeSelected];
 
     const newInnerDiv = document.createElement("div");
-    newInnerDiv.classList.add("SubjectSelection", "container", "container-fluid", "mt-5", "w-50");
+    newInnerDiv.classList.add("SubjectSelection", "container", "container-fluid", "mt-2", "w-50");
+
+    const title = document.createElement("h2");
+    title.textContent = "Choose subjects"
+    title.classList.add("display-1","text-center", "mb-2");
+    newInnerDiv.appendChild(title);
 
     const goBackToFirstViewLink = document.createElement("p");
     goBackToFirstViewLink.textContent = "Go back to registration";
@@ -433,6 +445,11 @@ function GenerateConfirmView(FormData, subjects){
     const confirmationDiv = document.createElement("div");
     confirmationDiv.classList.add("confirmationView", "container", "container-fluid","w-50", "mt-5");
 
+    const title = document.createElement("h2");
+    title.textContent = "Confirm Registration"
+    title.classList.add("display-1","text-center", "mb-2");
+    confirmationDiv.appendChild(title);
+
     const linkContainer = document.createElement("span");
     linkContainer.style.display = "inline";
 
@@ -457,7 +474,7 @@ function GenerateConfirmView(FormData, subjects){
     linkContainer.appendChild(spaceParragraf);
 
     const goBackToSecondViewLink = document.createElement("span");
-    goBackToSecondViewLink.textContent = "Go back to registration";
+    goBackToSecondViewLink.textContent = "Go back to subject choosing";
     goBackToSecondViewLink.style.color = "blue";
     goBackToSecondViewLink.style.textDecoration = "underline";
     goBackToSecondViewLink.style.cursor = "pointer";
@@ -488,7 +505,7 @@ function GenerateConfirmView(FormData, subjects){
     }
 
     const table = document.createElement("table");
-    table.classList.add("table", "table-bordered", "table-hover", "table-responsive", "mt-5") ;
+    table.classList.add("table", "table-bordered", "table-hover", "table-responsive", "table-primary","mt-5") ;
 
     const thTitle = document.createElement("th");
     thTitle.textContent = "Subjects"
@@ -542,29 +559,33 @@ function GenerateConfirmView(FormData, subjects){
         }
     }
 
+    const classDays = 5;
+
     for(let i = 0; i<  selectedObjects.length ; i++){
         const tSection = document.createElement("tr");
 
         const tdSubject = document.createElement("th");
-        tdSubject.setAttribute("scope", "row")
+        tdSubject.setAttribute("scope", "row");
+        tdSubject.classList.add("table-primary");
 
         tdSubject.textContent = selectedObjects[i].name;
 
         tSection.appendChild(tdSubject);
 
-        for(let j = 1; j <= 5; j++){
+        for(let j = 1; j <= classDays; j++){
             
          if (days[selectedObjects[i].time.split(" - ")[0]] === j) {
             const tdTime = document.createElement("td");
 
-            tdTime.textContent = selectedObjects[i].time;
-
+            tdTime.textContent = selectedObjects[i].time.split(" - ").splice(1).join(" - ");
+            tdTime.classList.add("table-primary");
             tSection.appendChild(tdTime);
 
             continue;
 
          }
          const tdEmpty = document.createElement("td");
+         tdEmpty.classList.add("table-primary");
 
          tSection.appendChild(tdEmpty);
             
@@ -585,7 +606,7 @@ function GenerateConfirmView(FormData, subjects){
             }
             return count;
         }
-        if(!confirm("Are you sure you whant to save this info?")) return;
+        if(!confirm("Are you sure you want to save this info?")) return;
         confirmationDiv.remove();
     
         FormData.name = "";

@@ -410,8 +410,8 @@ function GenerateSubjectSelectionView(degreeSelected){
 
     form.appendChild(buttonToSubmit);
     form.addEventListener("submit", (e) =>{
-        let AmountOfSubjectSectionSelected = 0;
-        const MinimunAmountOfSectionToBeSelected = 5;
+        let AmountOfSubjectsSectionSelected = 0;
+        const MinimunAmountOfSubjectSectionToBeSelected = 5;
         e.preventDefault();
 
         for(let i = 0; i< subjects.length; i++){
@@ -423,12 +423,12 @@ function GenerateSubjectSelectionView(degreeSelected){
                 DegreeSections[degreeSelected][i].times[j].isSelected = false; 
                 continue;
             }  
-            AmountOfSubjectSectionSelected++;
+            AmountOfSubjectsSectionSelected++;
             const selectedIndex = radios[j].getAttribute("data-index");
             DegreeSections[degreeSelected][i].times[selectedIndex].isSelected = true; 
            }
         }
-        if(AmountOfSubjectSectionSelected != MinimunAmountOfSectionToBeSelected) {
+        if(AmountOfSubjectsSectionSelected != MinimunAmountOfSubjectSectionToBeSelected) {
             alert("All fields are required.");
             return;
         }
@@ -489,11 +489,11 @@ function GenerateConfirmView(FormData, subjects){
     linkContainer.appendChild(goBackToSecondViewLink);
 
     const firstViewDataList = document.createElement("ul");
-    firstViewDataList.classList.add("list-group");
+    firstViewDataList.classList.add("list-group", "lead");
 
     for(let data in FormData){
         const firstViewDataListItem = document.createElement("li");
-        firstViewDataListItem.classList.add("list-group-item");
+        firstViewDataListItem.classList.add("list-group-item", "lead");
         firstViewDataListItem.textContent = `${data.replace(data[0], data[0].toUpperCase())}: `;
         if(data === "degree"){
             firstViewDataListItem.textContent += `${Degrees[FormData[data]]}`;
@@ -505,40 +505,46 @@ function GenerateConfirmView(FormData, subjects){
     }
 
     const table = document.createElement("table");
-    table.classList.add("table", "table-bordered", "table-hover", "table-responsive", "table-primary","mt-5") ;
+    table.classList.add("table", "table-bordered", "table-hover", "table-responsive", "table-primary","mt-5");
 
     const thTitle = document.createElement("th");
-    thTitle.textContent = "Subjects"
-    thTitle.setAttribute("scope", "col")
+    thTitle.textContent = "Subjects";
+    thTitle.setAttribute("scope", "col");
+    thTitle.classList.add("text-center");
 
     const th1 = document.createElement("th");
     th1.textContent = "Monday";
-    th1.setAttribute("scope", "col")
+    th1.setAttribute("scope", "col");
+    th1.classList.add("text-center");
 
     const th2 = document.createElement("th");
     th2.textContent = "Tuesday";
-    th2.setAttribute("scope", "col")
+    th2.setAttribute("scope", "col");
+    th2.classList.add("text-center");
 
     const th3 = document.createElement("th");
     th3.textContent = "Wednesday";
-    th3.setAttribute("scope", "col")
+    th3.setAttribute("scope", "col");
+    th3.classList.add("text-center");
 
     const th4 = document.createElement("th");
     th4.textContent = "Thursday";
-    th4.setAttribute("scope", "col")
+    th4.setAttribute("scope", "col");
+    th4.classList.add("text-center");
 
     const th5 = document.createElement("th");
     th5.textContent = "Friday";
-    th5.setAttribute("scope", "col")
+    th5.setAttribute("scope", "col");
+    th5.classList.add("text-center");
 
     const tHeader = document.createElement("tr");
    
-    tHeader.appendChild(thTitle)
-    tHeader.appendChild(th1)
-    tHeader.appendChild(th2)
-    tHeader.appendChild(th3)
-    tHeader.appendChild(th4)
-    tHeader.appendChild(th5)
+    tHeader.appendChild(thTitle);
+    tHeader.appendChild(th1);
+    tHeader.appendChild(th2);
+    tHeader.appendChild(th3);
+    tHeader.appendChild(th4);
+    tHeader.appendChild(th5);
     table.appendChild(tHeader);
 
     const days = {

@@ -12,15 +12,15 @@ const FormData ={
 const DegreeSections ={
     1:[
         {
-            subjectName: "programing 1",
+            subjectName: "Programing 1",
             times:[{time:"Lun - 8:00am - 11:00am", isSelected: false}, {time:"Lun - 1:00pm - 5:00pm", isSelected: false}, {time:"Lun - 6:00pm - 9:00pm", isSelected: false}]
         },
         {
-            subjectName: "intro to data bases",
+            subjectName: "Intro to data bases",
             times:[{time:"Mar - 8:00am - 11:00am", isSelected: false}, {time:"Mar - 1:00pm - 5:00pm", isSelected: false}, {time:"Mar - 6:00pm - 9:00pm", isSelected: false}]
         },
         {
-            subjectName: "intro to algorithms",
+            subjectName: "Intro to algorithms",
             times:[{time:"Mier - 8:00am - 11:00am", isSelected: false}, {time:"Mier - 1:00pm - 5:00pm", isSelected: false}, {time:"Mier - 6:00pm - 9:00pm", isSelected: false}]
         },
         {
@@ -34,7 +34,7 @@ const DegreeSections ={
     ],
     2:[
         {
-            subjectName: "intro to html",
+            subjectName: "Intro to html",
             times:[{time:"Lun - 8:00am - 11:00am", isSelected: false}, {time:"Lun - 1:00pm - 5:00pm", isSelected: false}, {time:"Lun - 6:00pm - 9:00pm", isSelected: false}]
         },
         {
@@ -50,13 +50,13 @@ const DegreeSections ={
             times:[{time:"Ju - 8:00am - 11:00am", isSelected: false}, {time:"Ju - 1:00pm - 5:00pm", isSelected: false}, {time:"Ju - 6:00pm - 9:00pm", isSelected: false}]
         },
         {
-            subjectName: "web programing 2",
+            subjectName: "Web programing 2",
             times:[{time:"Vie - 8:00am - 11:00am", isSelected: false}, {time:"Vie - 1:00pm - 5:00pm", isSelected: false}, {time:"Vie - 6:00pm - 9:00pm", isSelected: false}]
         }
     ],
     3:[
         {
-            subjectName: "intro to programing",
+            subjectName: "Intro to programing",
             times:[{time:"Lun - 8:00am - 11:00am", isSelected: false}, {time:"Lun - 1:00pm - 5:00pm", isSelected: false}, {time:"Lun - 6:00pm - 9:00pm", isSelected: false}]
         },
         {
@@ -78,7 +78,7 @@ const DegreeSections ={
     ],
     4:[
         {
-            subjectName: "studio recording",
+            subjectName: "Studio recording",
             times:[{time:"Lun - 8:00am - 11:00am", isSelected: false}, {time:"Lun - 1:00pm - 5:00pm", isSelected: false}, {time:"Lun - 6:00pm - 9:00pm", isSelected: false}]
         },
         {
@@ -133,22 +133,24 @@ const Degrees={
 function GenerateFormView(FormData){
  
     const FormDataContainer = document.createElement("div");
-    FormDataContainer.className = "form-data-container";
+    FormDataContainer.classList.add("form-data-container", "container", "container-fluid", "mt-5");
     
     const form = document.createElement("form");
     form.className = "form-data";
 
     const div1 = document.createElement("div");
-    div1.className = "form-div";
+    div1.classList.add("form-div", "mb-3") ;
 
     const labelName = document.createElement("label");
     labelName.textContent = "Name: ";
     labelName.htmlFor = "name"
+    labelName.classList.add("form-label")
     const inputName = document.createElement("input");
     inputName.type = "text";
     inputName.name = "name";
     inputName.id = "name"
     inputName.placeholder = "name";
+    inputName.classList.add("form-control", "mb-2", "input-group")
     inputName.value = FormData.name;
 
     div1.appendChild(labelName);
@@ -160,11 +162,13 @@ function GenerateFormView(FormData){
     const labelState = document.createElement("label");
     labelState.textContent = "State: ";
     labelState.htmlFor = "state"
+    labelState.classList.add("form-label")
     const inputState = document.createElement("input");
     inputState.type = "text";
     inputState.name = "state";
     inputState.id = "state"
     inputState.placeholder = "state";
+    inputState.classList.add("form-control", "mb-2", "input-group")
     inputState.value = FormData.state;
 
     div2.appendChild(labelState);
@@ -176,11 +180,13 @@ function GenerateFormView(FormData){
     const labelCity = document.createElement("label");
     labelCity.textContent = "City: ";
     labelCity.htmlFor = "city"
+    labelCity.classList.add("form-label")
     const inputCity = document.createElement("input");
     inputCity.type = "text";
     inputCity.name = "city";
     inputCity.id = "city"
     inputCity.placeholder = "city";
+    inputCity.classList.add("form-control", "mb-2", "input-group")
     inputCity.value = FormData.city;
     
     div3.appendChild(labelCity);
@@ -193,11 +199,13 @@ function GenerateFormView(FormData){
     const labelSector = document.createElement("label");
     labelSector.textContent = "Sector: ";
     labelSector.htmlFor = "sector"
+    labelSector.classList.add("form-label")
     const inputSector = document.createElement("input");
     inputSector.type = "text";
     inputSector.name = "sector";
     inputSector.id = "sector"
     inputSector.placeholder = "sector";
+    inputSector.classList.add("form-control", "mb-2", "input-group")
     inputSector.value = FormData.sector;
 
     div4.appendChild(labelSector)
@@ -209,11 +217,13 @@ function GenerateFormView(FormData){
     const labelStreet = document.createElement("label");
     labelStreet.textContent = "Street: ";
     labelStreet.htmlFor = "street"
+    labelStreet.classList.add("form-label")
     const inputStreet = document.createElement("input");
     inputStreet.type = "text";
     inputStreet.name = "street";
     inputStreet.id = "street"
     inputStreet.placeholder = "street";
+    inputStreet.classList.add("form-control", "mb-2", "input-group")
     inputStreet.value = FormData.street;
 
     div5.appendChild(labelStreet);
@@ -225,10 +235,12 @@ function GenerateFormView(FormData){
     const labelDegree = document.createElement("label");
     labelDegree.textContent = "Degree: ";
     labelDegree.htmlFor = "degree"
+    labelDegree.classList.add("form-label")
 
     const select = document.createElement("select");
     select.id ="degree";
     select.name = "degree";
+    select.classList.add("form-select", "mb-2", "input-group")
     
     const defaultOption = document.createElement("option")
     defaultOption.value = ""
@@ -258,11 +270,15 @@ function GenerateFormView(FormData){
     option5.value = "5";
     option5.textContent = "NetWorking";
     option5.selected = FormData.degree == option5.value;
- 
+
+    const btnDiv = document.createElement("div");
+    btnDiv.style.minWidth = "100%";
+
     const ClearBtn = document.createElement("button");
     ClearBtn.className = "clear"
     ClearBtn.textContent = "clear"
     ClearBtn.type = "button"
+    ClearBtn.classList.add("btn", "btn-outline-info", "w-50")
     ClearBtn.addEventListener("click", (e)=>{
         e.preventDefault();
         document.querySelector("#name").value ="";
@@ -277,6 +293,10 @@ function GenerateFormView(FormData){
     SubmitBtn.className = "submit";
     SubmitBtn.textContent = "submit";
     SubmitBtn.type = "submit"
+    SubmitBtn.classList.add("btn", "btn-info", "w-50")
+     
+    btnDiv.appendChild(ClearBtn);
+    btnDiv.appendChild(SubmitBtn);
 
     select.appendChild(defaultOption);
     select.appendChild(option1);
@@ -293,8 +313,7 @@ function GenerateFormView(FormData){
     form.appendChild(div4);
     form.appendChild(div5);
     form.appendChild(div6);
-    form.appendChild(ClearBtn);
-    form.appendChild(SubmitBtn);
+    form.appendChild(btnDiv);
 
     form.addEventListener("submit",  (e)=>{
         e.preventDefault();
@@ -342,14 +361,14 @@ function GenerateFormView(FormData){
 
 }
 
-  function GenerateSubjectSelectionView(degreeSelected){
+function GenerateSubjectSelectionView(degreeSelected){
    if(document.querySelector(".form-data-container") != null) document.querySelector(".form-data-container").remove();
     let subjects = {...DegreeSections};
     subjects = subjects[degreeSelected];
     console.log(subjects)
 
     const newInnerDiv = document.createElement("div");
-    newInnerDiv.className = "SubjectSelection";
+    newInnerDiv.classList.add("SubjectSelection", "container", "container-fluid", "mt-5", "w-50") ;
 
     const goBackToFirstBtn = document.createElement("p");
     goBackToFirstBtn.textContent = "Go back to registration";
@@ -370,44 +389,54 @@ function GenerateFormView(FormData){
 
     for(let i = 0; i < subjects.length; i++){
         const para = document.createElement("p");
+        para.classList.add("fw-bold","mt-3","text-center");
         para.textContent = subjects[i].subjectName;
         form.appendChild(para);
+
         for(let j = 0; j < subjects[i].times.length; j++){
-            const radioInput = document.createElement("input")
+            const div = document.createElement("div");
+            div.classList.add("d-flex", "aling-items-center", "justify-content-center", "me-3", "mb-2");
+
+            const radioInput = document.createElement("input");
             radioInput.type = "radio";
             radioInput.value = subjects[i].times[j].time;
             radioInput.name = subjects[i].subjectName;
-            radioInput.setAttribute("data-index", j)
+            radioInput.classList.add("btn-check", "w-50","text-center");
+            radioInput.setAttribute("data-index", j);
             radioInput.id = subjects[i].subjectName + subjects[i].times[j].time;
-            radioInput.checked = subjects[i].times[j].isSelected
-            form.appendChild(radioInput)
-            const label = document.createElement("label")
-            label.textContent = subjects[i].times[j].time
-            label.htmlFor = subjects[i].subjectName
-            form.appendChild(label)
+            radioInput.checked = subjects[i].times[j].isSelected;
+            div.appendChild(radioInput);
 
-            form.appendChild(document.createElement("br"))
+            const label = document.createElement("label");
+            label.textContent = subjects[i].times[j].time;
+            label.htmlFor = radioInput.id;
+            label.classList.add("btn", "btn-outline-secondary", "ms-1", "w-50","text-center");
+            div.appendChild(label);
+            form.appendChild(div);
         }
     }
 
     const buttonToSubmit = document.createElement("button");
     buttonToSubmit.type ="submit";
-    buttonToSubmit.textContent = "submit";
+    buttonToSubmit.textContent = "Submit";
+    buttonToSubmit.classList.add("btn", "btn-primary", "w-100","text-center")
 
     form.appendChild(buttonToSubmit);
     form.addEventListener("submit", (e) =>{
         const validationsResults = [];
         let isValid = true;
-      
         e.preventDefault();
+
         for(let i = 0; i< subjects.length; i++){
            const radios = document.getElementsByName(subjects[i].subjectName) 
 
            for(let j = 0; j < radios.length; j++){
+
             if(!radios[j].checked === true){
                 DegreeSections[degreeSelected][i].times[j].isSelected = false; 
                 continue;
             }  
+
             const selectedIndex = radios[j].getAttribute("data-index")
             DegreeSections[degreeSelected][i].times[selectedIndex].isSelected = true; 
            }
@@ -424,14 +453,21 @@ function GenerateConfirmView(FormData, subjects){
     document.querySelector(".SubjectSelection").remove();
     console.log(subjects)
 
+    
     const confirmationDiv = document.createElement("div");
-    confirmationDiv.className = "confirmationView"
+    confirmationDiv.classList.add("confirmationView", "container", "container-fluid","w-50", "mt-5");
 
-    const goBackToFirstBtn = document.createElement("p");
+
+    const span = document.createElement("span");
+    span.style.display = "inline";
+
+    const goBackToFirstBtn = document.createElement("span");
     goBackToFirstBtn.textContent = "Go back to registration";
     goBackToFirstBtn.style.color = "blue";
     goBackToFirstBtn.style.textDecoration = "underline";
     goBackToFirstBtn.style.cursor = "pointer";
+    goBackToFirstBtn.style.display = "inline";
+    goBackToFirstBtn.style.margin = "0";
 
     goBackToFirstBtn.addEventListener("click", (e) =>{
         e.preventDefault();
@@ -440,11 +476,19 @@ function GenerateConfirmView(FormData, subjects){
         console.log(FormData);
     });
 
-    const goBackToSecondBtn = document.createElement("p");
+    span.appendChild(goBackToFirstBtn)
+
+    const spaceParragraf = document.createElement("span");
+    spaceParragraf.textContent = " > ";
+    span.appendChild(spaceParragraf);
+
+    const goBackToSecondBtn = document.createElement("span");
     goBackToSecondBtn.textContent = "Go back to registration";
     goBackToSecondBtn.style.color = "blue";
     goBackToSecondBtn.style.textDecoration = "underline";
     goBackToSecondBtn.style.cursor = "pointer";
+    goBackToSecondBtn.style.display = "inline";
+    goBackToSecondBtn.style.margin = "0";
 
     goBackToSecondBtn.addEventListener("click", (e) =>{
         e.preventDefault();
@@ -452,11 +496,14 @@ function GenerateConfirmView(FormData, subjects){
         GenerateSubjectSelectionView(FormData.degree);
         console.log(FormData.degree);
     });
+    span.appendChild(goBackToSecondBtn);
 
     const ul = document.createElement("ul");
+    ul.classList.add("list-group");
 
     for(let data in FormData){
         const li = document.createElement("li");
+        li.classList.add("list-group-item");
         if(data === "degree"){
             li.textContent = `${data}: ${Degrees[FormData[data]]}`;
             ul.appendChild(li);
@@ -467,21 +514,34 @@ function GenerateConfirmView(FormData, subjects){
     }
 
     const table = document.createElement("table");
+    table.classList.add("table", "table-bordered", "table-hover", "table-responsive") ;
+
     const thTitle = document.createElement("th");
     thTitle.textContent = "Subjects"
+    thTitle.setAttribute("scope", "col")
+
     const th1 = document.createElement("th");
     th1.textContent = "Monday";
+    th1.setAttribute("scope", "col")
 
     const th2 = document.createElement("th");
     th2.textContent = "Tuesday";
+    th2.setAttribute("scope", "col")
+
     const th3 = document.createElement("th");
     th3.textContent = "Wednesday";
+    th3.setAttribute("scope", "col")
+
     const th4 = document.createElement("th");
     th4.textContent = "Thursday";
+    th4.setAttribute("scope", "col")
+
     const th5 = document.createElement("th");
     th5.textContent = "Friday";
+    th5.setAttribute("scope", "col")
 
     const tHeader = document.createElement("tr");
+   
 
     tHeader.appendChild(thTitle)
     tHeader.appendChild(th1)
@@ -513,7 +573,8 @@ function GenerateConfirmView(FormData, subjects){
     for(let i = 0; i<  selectedObjects.length ; i++){
         const tSection = document.createElement("tr");
 
-        const tdSubject = document.createElement("td");
+        const tdSubject = document.createElement("th");
+        tdSubject.setAttribute("scope", "row")
 
         tdSubject.textContent = selectedObjects[i].name;
 
@@ -542,6 +603,7 @@ function GenerateConfirmView(FormData, subjects){
 
     const SubmitBtn = document.createElement("button");
     SubmitBtn.textContent = "Submit";
+    SubmitBtn.classList.add("btn", "btn-primary", "w-100")
     SubmitBtn.addEventListener("click", (e) =>{
         e.preventDefault();
         if(!confirm("Are you sure you whant to save this info ?")) return;
@@ -567,9 +629,8 @@ function GenerateConfirmView(FormData, subjects){
          console.log(DegreeSections)
         GenerateFormView(FormData);
     });
-
-    confirmationDiv.appendChild(goBackToFirstBtn);
-    confirmationDiv.appendChild(goBackToSecondBtn);
+    
+    confirmationDiv.appendChild(span);
     confirmationDiv.appendChild(ul);
     confirmationDiv.appendChild(table);
     confirmationDiv.appendChild(SubmitBtn);
@@ -582,10 +643,10 @@ GenerateFormView(FormData);
 function validate(input){
     if(input.value === "" || input.value === null || input.value === " "){
         input.style.borderColor = "red";
-        input.style.borderWidth = "5px";
+        input.style.borderWidth = "2px";
         return false;
     }
     input.style.borderColor = "green";
-    input.style.borderWidth = "5px";
+    input.style.borderWidth = "2px";
     return true;
 }

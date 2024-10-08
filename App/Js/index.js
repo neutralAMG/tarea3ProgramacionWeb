@@ -133,24 +133,24 @@ const Degrees={
 function GenerateFormView(FormData){
  
     const FormDataContainer = document.createElement("div");
-    FormDataContainer.classList.add("form-data-container", "container", "container-fluid", "mt-5");
+    FormDataContainer.classList.add("form-data-container", "container", "container-fluid", "mt-5", "w-50");
     
     const form = document.createElement("form");
     form.className = "form-data";
 
     const div1 = document.createElement("div");
-    div1.classList.add("form-div", "mb-3") ;
+    div1.classList.add("form-div", "mb-3");
 
     const labelName = document.createElement("label");
     labelName.textContent = "Name: ";
-    labelName.htmlFor = "name"
-    labelName.classList.add("form-label")
+    labelName.htmlFor = "name";
+    labelName.classList.add("form-label");
     const inputName = document.createElement("input");
     inputName.type = "text";
     inputName.name = "name";
-    inputName.id = "name"
+    inputName.id = "name";
     inputName.placeholder = "name";
-    inputName.classList.add("form-control", "mb-2", "input-group")
+    inputName.classList.add("form-control", "mb-2", "input-group");
     inputName.value = FormData.name;
 
     div1.appendChild(labelName);
@@ -161,14 +161,14 @@ function GenerateFormView(FormData){
 
     const labelState = document.createElement("label");
     labelState.textContent = "State: ";
-    labelState.htmlFor = "state"
-    labelState.classList.add("form-label")
+    labelState.htmlFor = "state";
+    labelState.classList.add("form-label");
     const inputState = document.createElement("input");
     inputState.type = "text";
     inputState.name = "state";
-    inputState.id = "state"
+    inputState.id = "state";
     inputState.placeholder = "state";
-    inputState.classList.add("form-control", "mb-2", "input-group")
+    inputState.classList.add("form-control", "mb-2", "input-group");
     inputState.value = FormData.state;
 
     div2.appendChild(labelState);
@@ -179,51 +179,50 @@ function GenerateFormView(FormData){
 
     const labelCity = document.createElement("label");
     labelCity.textContent = "City: ";
-    labelCity.htmlFor = "city"
-    labelCity.classList.add("form-label")
+    labelCity.htmlFor = "city";
+    labelCity.classList.add("form-label");
     const inputCity = document.createElement("input");
     inputCity.type = "text";
     inputCity.name = "city";
-    inputCity.id = "city"
+    inputCity.id = "city";
     inputCity.placeholder = "city";
-    inputCity.classList.add("form-control", "mb-2", "input-group")
+    inputCity.classList.add("form-control", "mb-2", "input-group");
     inputCity.value = FormData.city;
     
     div3.appendChild(labelCity);
     div3.appendChild(inputCity);
-
 
     const div4 = document.createElement("div");
     div1.className = "form-div";
 
     const labelSector = document.createElement("label");
     labelSector.textContent = "Sector: ";
-    labelSector.htmlFor = "sector"
-    labelSector.classList.add("form-label")
+    labelSector.htmlFor = "sector";
+    labelSector.classList.add("form-label");
     const inputSector = document.createElement("input");
     inputSector.type = "text";
     inputSector.name = "sector";
-    inputSector.id = "sector"
+    inputSector.id = "sector";
     inputSector.placeholder = "sector";
-    inputSector.classList.add("form-control", "mb-2", "input-group")
+    inputSector.classList.add("form-control", "mb-2", "input-group");
     inputSector.value = FormData.sector;
 
-    div4.appendChild(labelSector)
-    div4.appendChild(inputSector)
+    div4.appendChild(labelSector);
+    div4.appendChild(inputSector);
 
     const div5 = document.createElement("div");
     div1.className = "form-div";
 
     const labelStreet = document.createElement("label");
     labelStreet.textContent = "Street: ";
-    labelStreet.htmlFor = "street"
-    labelStreet.classList.add("form-label")
+    labelStreet.htmlFor = "street";
+    labelStreet.classList.add("form-label");
     const inputStreet = document.createElement("input");
     inputStreet.type = "text";
     inputStreet.name = "street";
-    inputStreet.id = "street"
+    inputStreet.id = "street";
     inputStreet.placeholder = "street";
-    inputStreet.classList.add("form-control", "mb-2", "input-group")
+    inputStreet.classList.add("form-control", "mb-2", "input-group");
     inputStreet.value = FormData.street;
 
     div5.appendChild(labelStreet);
@@ -234,42 +233,31 @@ function GenerateFormView(FormData){
 
     const labelDegree = document.createElement("label");
     labelDegree.textContent = "Degree: ";
-    labelDegree.htmlFor = "degree"
-    labelDegree.classList.add("form-label")
+    labelDegree.htmlFor = "degree";
+    labelDegree.classList.add("form-label");
 
     const select = document.createElement("select");
     select.id ="degree";
     select.name = "degree";
-    select.classList.add("form-select", "mb-2", "input-group")
+    select.classList.add("form-select", "mb-2", "input-group");
     
-    const defaultOption = document.createElement("option")
-    defaultOption.value = ""
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
     defaultOption.selected = FormData.degree === 0;
+    select.appendChild(defaultOption);
 
-    const option1 = document.createElement("option")
-    option1.value = "1";
-    option1.textContent = "Software";
-    option1.selected = FormData.degree == option1.value;
+    let count = 1;
+    ["Software", "Multimedia", "Mecatronics", "Sound", "NetWorking"].forEach(op =>{
+      const option = document.createElement("option");   
+      option.value = count.toString();
+      option.textContent = op;
+      option.selected = FormData.degree == option.value;
+      select.appendChild(option);
+      count++;
+    })
 
-    const option2 = document.createElement("option")
-    option2.value = "2";
-    option2.textContent = "Multimedia";
-    option2.selected = FormData.degree == option2.value;
-
-    const option3 = document.createElement("option")
-    option3.value = "3";
-    option3.textContent = "Mecatronics";
-    option3.selected = FormData.degree == option3.value;
-
-    const option4 = document.createElement("option")
-    option4.value = "4";
-    option4.textContent = "Sound";
-    option4.selected = FormData.degree == option4.value;
-
-    const option5 = document.createElement("option")
-    option5.value = "5";
-    option5.textContent = "NetWorking";
-    option5.selected = FormData.degree == option5.value;
+    div6.appendChild(labelDegree);
+    div6.appendChild(select);
 
     const btnDiv = document.createElement("div");
     btnDiv.style.minWidth = "100%";
@@ -281,31 +269,22 @@ function GenerateFormView(FormData){
     ClearBtn.classList.add("btn", "btn-outline-info", "w-50")
     ClearBtn.addEventListener("click", (e)=>{
         e.preventDefault();
-        document.querySelector("#name").value ="";
-        document.querySelector("#state").value ="";
-        document.querySelector("#city").value ="";
-        document.querySelector("#sector").value ="";
-        document.querySelector("#street").value ="";
-        document.querySelector("#degree").value ="";
+        ["#name", "#state", "#city", "#sector", "#street", "#degree"].forEach(inputId =>{
+            const input = document.querySelector(inputId);
+            input.value = "";
+            input.style.borderColor = "#dee2e6";
+            input.style.borderWidth = "1px";
+        })
     })
 
     const SubmitBtn = document.createElement("button");
     SubmitBtn.className = "submit";
     SubmitBtn.textContent = "submit";
-    SubmitBtn.type = "submit"
-    SubmitBtn.classList.add("btn", "btn-info", "w-50")
+    SubmitBtn.type = "submit";
+    SubmitBtn.classList.add("btn", "btn-info", "w-50");
      
     btnDiv.appendChild(ClearBtn);
     btnDiv.appendChild(SubmitBtn);
-
-    select.appendChild(defaultOption);
-    select.appendChild(option1);
-    select.appendChild(option2);
-    select.appendChild(option3);
-    select.appendChild(option4);
-    select.appendChild(option5);
-    div6.appendChild(labelDegree);
-    div6.appendChild(select);
 
     form.appendChild(div1);
     form.appendChild(div2);
@@ -325,7 +304,7 @@ function GenerateFormView(FormData){
         const sectorInput = document.querySelector("#sector");
         const streetInput = document.querySelector("#street");
         const degreeInput = document.querySelector("#degree");
-    
+        
         validationsResults.push(validate(nameInput)); 
         validationsResults.push(validate(stateInput)); 
         validationsResults.push(validate(cityInput));
@@ -342,8 +321,7 @@ function GenerateFormView(FormData){
         }
     
         if (isValid === false) return;
-    
-        
+
         FormData.name = nameInput.value;
         FormData.state = stateInput.value;
         FormData.city = cityInput.value;
@@ -352,12 +330,10 @@ function GenerateFormView(FormData){
         FormData.degree = degreeInput.value;
     
         GenerateSubjectSelectionView(FormData.degree);
-    
-        console.log(FormData);
     })
     
     FormDataContainer.appendChild(form);
-    mainContainer.appendChild(FormDataContainer)
+    mainContainer.appendChild(FormDataContainer);
 
 }
 
@@ -365,70 +341,69 @@ function GenerateSubjectSelectionView(degreeSelected){
    if(document.querySelector(".form-data-container") != null) document.querySelector(".form-data-container").remove();
     let subjects = {...DegreeSections};
     subjects = subjects[degreeSelected];
-    console.log(subjects)
 
     const newInnerDiv = document.createElement("div");
-    newInnerDiv.classList.add("SubjectSelection", "container", "container-fluid", "mt-5", "w-50") ;
+    newInnerDiv.classList.add("SubjectSelection", "container", "container-fluid", "mt-5", "w-50");
 
-    const goBackToFirstBtn = document.createElement("p");
-    goBackToFirstBtn.textContent = "Go back to registration";
-    goBackToFirstBtn.style.color = "blue";
-    goBackToFirstBtn.style.textDecoration = "underline";
-    goBackToFirstBtn.style.cursor = "pointer";
+    const goBackToFirstViewLink = document.createElement("p");
+    goBackToFirstViewLink.textContent = "Go back to registration";
+    goBackToFirstViewLink.style.color = "blue";
+    goBackToFirstViewLink.style.textDecoration = "underline";
+    goBackToFirstViewLink.style.cursor = "pointer";
 
-    goBackToFirstBtn.addEventListener("click", (e) =>{
+    goBackToFirstViewLink.addEventListener("click", (e) =>{
         e.preventDefault();
         newInnerDiv.remove();
         GenerateFormView(FormData);
-        console.log(FormData);
     });
 
-    newInnerDiv.appendChild(goBackToFirstBtn)
-    const form = document.createElement("form")
-    form.className = "subjectForm"
+    newInnerDiv.appendChild(goBackToFirstViewLink);
+    const form = document.createElement("form");
+    form.classList.add("subjectForm");
 
     for(let i = 0; i < subjects.length; i++){
-        const para = document.createElement("p");
-        para.classList.add("fw-bold","mt-3","text-center");
-        para.textContent = subjects[i].subjectName;
-        form.appendChild(para);
+        const subjectTitle = document.createElement("p");
+        subjectTitle.classList.add("fw-bold","mt-3","text-center");
+        subjectTitle.textContent = subjects[i].subjectName;
+        form.appendChild(subjectTitle);
 
         for(let j = 0; j < subjects[i].times.length; j++){
-            const div = document.createElement("div");
-            div.classList.add("d-flex", "aling-items-center", "justify-content-center", "me-3", "mb-2");
+            const radioInputContainer = document.createElement("div");
+            radioInputContainer.classList.add("d-flex", "aling-items-center", "justify-content-center", "me-3", "mb-2", "w-100");
 
             const radioInput = document.createElement("input");
             radioInput.type = "radio";
             radioInput.value = subjects[i].times[j].time;
             radioInput.name = subjects[i].subjectName;
-            radioInput.classList.add("btn-check", "w-50","text-center");
+            radioInput.classList.add("btn-check","text-center");
             radioInput.setAttribute("data-index", j);
             radioInput.id = subjects[i].subjectName + subjects[i].times[j].time;
             radioInput.checked = subjects[i].times[j].isSelected;
-            div.appendChild(radioInput);
+            radioInputContainer.appendChild(radioInput);
 
-            const label = document.createElement("label");
-            label.textContent = subjects[i].times[j].time;
-            label.htmlFor = radioInput.id;
-            label.classList.add("btn", "btn-outline-secondary", "ms-1", "w-50","text-center");
-            div.appendChild(label);
-            form.appendChild(div);
+            const radioLabel = document.createElement("label");
+            radioLabel.textContent = subjects[i].times[j].time;
+            radioLabel.htmlFor = radioInput.id;
+            radioLabel.classList.add("btn", "btn-outline-secondary", "ms-1","text-center", "w-100");
+            radioInputContainer.appendChild(radioLabel);
+            
+            form.appendChild(radioInputContainer);
         }
     }
 
     const buttonToSubmit = document.createElement("button");
     buttonToSubmit.type ="submit";
     buttonToSubmit.textContent = "Submit";
-    buttonToSubmit.classList.add("btn", "btn-primary", "w-100","text-center")
+    buttonToSubmit.classList.add("btn", "btn-primary", "w-100","text-center", "mb-1", "mt-1");
 
     form.appendChild(buttonToSubmit);
     form.addEventListener("submit", (e) =>{
-        const validationsResults = [];
-        let isValid = true;
+        let AmountOfSubjectSectionSelected = 0;
+        const MinimunAmountOfSectionToBeSelected = 5;
         e.preventDefault();
 
         for(let i = 0; i< subjects.length; i++){
-           const radios = document.getElementsByName(subjects[i].subjectName) 
+           const radios = document.getElementsByName(subjects[i].subjectName);
 
            for(let j = 0; j < radios.length; j++){
 
@@ -436,27 +411,27 @@ function GenerateSubjectSelectionView(degreeSelected){
                 DegreeSections[degreeSelected][i].times[j].isSelected = false; 
                 continue;
             }  
-
-            const selectedIndex = radios[j].getAttribute("data-index")
+            AmountOfSubjectSectionSelected++;
+            const selectedIndex = radios[j].getAttribute("data-index");
             DegreeSections[degreeSelected][i].times[selectedIndex].isSelected = true; 
            }
         }
-        console.log(subjects);
-        GenerateConfirmView(FormData, subjects)
+        if(AmountOfSubjectSectionSelected != MinimunAmountOfSectionToBeSelected) {
+            alert("All fields are required.");
+            return;
+        }
+        GenerateConfirmView(FormData, subjects);
     })
-    newInnerDiv.appendChild(form)
+    newInnerDiv.appendChild(form);
 
     mainContainer.appendChild(newInnerDiv);
 }
 
 function GenerateConfirmView(FormData, subjects){
     document.querySelector(".SubjectSelection").remove();
-    console.log(subjects)
 
-    
     const confirmationDiv = document.createElement("div");
     confirmationDiv.classList.add("confirmationView", "container", "container-fluid","w-50", "mt-5");
-
 
     const span = document.createElement("span");
     span.style.display = "inline";
@@ -473,7 +448,6 @@ function GenerateConfirmView(FormData, subjects){
         e.preventDefault();
         confirmationDiv.remove();
         GenerateFormView(FormData);
-        console.log(FormData);
     });
 
     span.appendChild(goBackToFirstBtn)
@@ -494,7 +468,6 @@ function GenerateConfirmView(FormData, subjects){
         e.preventDefault();
         confirmationDiv.remove();
         GenerateSubjectSelectionView(FormData.degree);
-        console.log(FormData.degree);
     });
     span.appendChild(goBackToSecondBtn);
 
@@ -504,17 +477,18 @@ function GenerateConfirmView(FormData, subjects){
     for(let data in FormData){
         const li = document.createElement("li");
         li.classList.add("list-group-item");
+        li.textContent = `${data.replace(data[0], data[0].toUpperCase())}: `;
         if(data === "degree"){
-            li.textContent = `${data}: ${Degrees[FormData[data]]}`;
+            li.textContent += `${Degrees[FormData[data]]}`;
             ul.appendChild(li);
             continue;
         }
-        li.textContent = `${data}: ${FormData[data]}`;
+        li.textContent += `${FormData[data]}`;
         ul.appendChild(li);
     }
 
     const table = document.createElement("table");
-    table.classList.add("table", "table-bordered", "table-hover", "table-responsive") ;
+    table.classList.add("table", "table-bordered", "table-hover", "table-responsive", "mt-5") ;
 
     const thTitle = document.createElement("th");
     thTitle.textContent = "Subjects"
@@ -603,10 +577,10 @@ function GenerateConfirmView(FormData, subjects){
 
     const SubmitBtn = document.createElement("button");
     SubmitBtn.textContent = "Submit";
-    SubmitBtn.classList.add("btn", "btn-primary", "w-100")
+    SubmitBtn.classList.add("btn", "btn-primary", "w-100", "mt-1")
     SubmitBtn.addEventListener("click", (e) =>{
         e.preventDefault();
-        if(!confirm("Are you sure you whant to save this info ?")) return;
+        if(!confirm("Are you sure you whant to save this info?")) return;
         confirmationDiv.remove();
     
         FormData.name = "";
@@ -615,18 +589,15 @@ function GenerateConfirmView(FormData, subjects){
         FormData.sector = "";
         FormData.street = "";
         FormData.degree = 0;
-        let count = 5;
-        for(let i = 1; i <= count; i++){
-            for(let j = 0; j < DegreeSections[i][j].length; j++){
-                
-                for(let s = 0; s < DegreeSections[i][j].times.length; s++){
-                    DegreeSections[i][j].times[s].isSelected = false; 
-                }
-            }
-          
-         }
-         console.log(subjects);
-         console.log(DegreeSections)
+   
+        for(let i = 1; i <=5; i++){
+            for(let j = 0; j< DegreeSections[i].length; j++){
+                DegreeSections[i][j].times.forEach(el => {
+                    el.isSelected = false;
+                });
+            } 
+        }
+
         GenerateFormView(FormData);
     });
     

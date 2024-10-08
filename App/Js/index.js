@@ -433,58 +433,58 @@ function GenerateConfirmView(FormData, subjects){
     const confirmationDiv = document.createElement("div");
     confirmationDiv.classList.add("confirmationView", "container", "container-fluid","w-50", "mt-5");
 
-    const span = document.createElement("span");
-    span.style.display = "inline";
+    const linkContainer = document.createElement("span");
+    linkContainer.style.display = "inline";
 
-    const goBackToFirstBtn = document.createElement("span");
-    goBackToFirstBtn.textContent = "Go back to registration";
-    goBackToFirstBtn.style.color = "blue";
-    goBackToFirstBtn.style.textDecoration = "underline";
-    goBackToFirstBtn.style.cursor = "pointer";
-    goBackToFirstBtn.style.display = "inline";
-    goBackToFirstBtn.style.margin = "0";
+    const goBackToFirstViewLink = document.createElement("span");
+    goBackToFirstViewLink.textContent = "Go back to registration";
+    goBackToFirstViewLink.style.color = "blue";
+    goBackToFirstViewLink.style.textDecoration = "underline";
+    goBackToFirstViewLink.style.cursor = "pointer";
+    goBackToFirstViewLink.style.display = "inline";
+    goBackToFirstViewLink.style.margin = "0";
 
-    goBackToFirstBtn.addEventListener("click", (e) =>{
+    goBackToFirstViewLink.addEventListener("click", (e) =>{
         e.preventDefault();
         confirmationDiv.remove();
         GenerateFormView(FormData);
     });
 
-    span.appendChild(goBackToFirstBtn)
+    linkContainer.appendChild(goBackToFirstViewLink)
 
     const spaceParragraf = document.createElement("span");
     spaceParragraf.textContent = " > ";
-    span.appendChild(spaceParragraf);
+    linkContainer.appendChild(spaceParragraf);
 
-    const goBackToSecondBtn = document.createElement("span");
-    goBackToSecondBtn.textContent = "Go back to registration";
-    goBackToSecondBtn.style.color = "blue";
-    goBackToSecondBtn.style.textDecoration = "underline";
-    goBackToSecondBtn.style.cursor = "pointer";
-    goBackToSecondBtn.style.display = "inline";
-    goBackToSecondBtn.style.margin = "0";
+    const goBackToSecondViewLink = document.createElement("span");
+    goBackToSecondViewLink.textContent = "Go back to registration";
+    goBackToSecondViewLink.style.color = "blue";
+    goBackToSecondViewLink.style.textDecoration = "underline";
+    goBackToSecondViewLink.style.cursor = "pointer";
+    goBackToSecondViewLink.style.display = "inline";
+    goBackToSecondViewLink.style.margin = "0";
 
-    goBackToSecondBtn.addEventListener("click", (e) =>{
+    goBackToSecondViewLink.addEventListener("click", (e) =>{
         e.preventDefault();
         confirmationDiv.remove();
         GenerateSubjectSelectionView(FormData.degree);
     });
-    span.appendChild(goBackToSecondBtn);
+    linkContainer.appendChild(goBackToSecondViewLink);
 
-    const ul = document.createElement("ul");
-    ul.classList.add("list-group");
+    const firstViewDataList = document.createElement("ul");
+    firstViewDataList.classList.add("list-group");
 
     for(let data in FormData){
-        const li = document.createElement("li");
-        li.classList.add("list-group-item");
-        li.textContent = `${data.replace(data[0], data[0].toUpperCase())}: `;
+        const firstViewDataListItem = document.createElement("li");
+        firstViewDataListItem.classList.add("list-group-item");
+        firstViewDataListItem.textContent = `${data.replace(data[0], data[0].toUpperCase())}: `;
         if(data === "degree"){
-            li.textContent += `${Degrees[FormData[data]]}`;
-            ul.appendChild(li);
+            firstViewDataListItem.textContent += `${Degrees[FormData[data]]}`;
+            firstViewDataList.appendChild(firstViewDataListItem);
             continue;
         }
-        li.textContent += `${FormData[data]}`;
-        ul.appendChild(li);
+        firstViewDataListItem.textContent += `${FormData[data]}`;
+        firstViewDataList.appendChild(firstViewDataListItem);
     }
 
     const table = document.createElement("table");
@@ -516,7 +516,6 @@ function GenerateConfirmView(FormData, subjects){
 
     const tHeader = document.createElement("tr");
    
-
     tHeader.appendChild(thTitle)
     tHeader.appendChild(th1)
     tHeader.appendChild(th2)
@@ -524,7 +523,6 @@ function GenerateConfirmView(FormData, subjects){
     tHeader.appendChild(th4)
     tHeader.appendChild(th5)
     table.appendChild(tHeader);
-
 
     const days = {
         "Lun": 1,
@@ -580,6 +578,13 @@ function GenerateConfirmView(FormData, subjects){
     SubmitBtn.classList.add("btn", "btn-primary", "w-100", "mt-1")
     SubmitBtn.addEventListener("click", (e) =>{
         e.preventDefault();
+        const AmountOfDegrees = ()=> {
+            let count = 0;
+            for( let degree in Degrees){
+                count++;
+            }
+            return count;
+        }
         if(!confirm("Are you sure you whant to save this info?")) return;
         confirmationDiv.remove();
     
@@ -589,11 +594,11 @@ function GenerateConfirmView(FormData, subjects){
         FormData.sector = "";
         FormData.street = "";
         FormData.degree = 0;
-   
-        for(let i = 1; i <=5; i++){
+        
+        for(let i = 1; i <= AmountOfDegrees(); i++){
             for(let j = 0; j< DegreeSections[i].length; j++){
-                DegreeSections[i][j].times.forEach(el => {
-                    el.isSelected = false;
+                DegreeSections[i][j].times.forEach(element => {
+                    element.isSelected = false;
                 });
             } 
         }
@@ -601,8 +606,8 @@ function GenerateConfirmView(FormData, subjects){
         GenerateFormView(FormData);
     });
     
-    confirmationDiv.appendChild(span);
-    confirmationDiv.appendChild(ul);
+    confirmationDiv.appendChild(linkContainer);
+    confirmationDiv.appendChild(firstViewDataList);
     confirmationDiv.appendChild(table);
     confirmationDiv.appendChild(SubmitBtn);
     mainContainer.appendChild(confirmationDiv);
